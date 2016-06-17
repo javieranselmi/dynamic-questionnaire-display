@@ -1,44 +1,17 @@
-var app = angular.module('app', ['ui.bootstrap']);
-app.controller('mainCtrl',['$scope',function($scope){
-    
-  $scope.greet = "Prueba WOT-C";
-  
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-    
-  $scope.today();
+var app = angular.module('dynamic-questionnaire', ['ui.bootstrap','ngResource']);
 
-  $scope.select = {
-      options: ["pato","perro","elefante","gaviota"]
-  };
+app.factory('Section', ['$resource', function($resource) {
+    return $resource('/api/section/:id');
+}]);
+
+app.controller('mainCtrl',['$scope','$http','$resource','Section',function($scope,$http,$resource,Section){
     
-  $scope.questionList =
-    [{ id: 1,
-      text: "Have you ever done prison time for a federal fellony?",
-      dependencies: [],
-      type: "bool" //Domain: "date","bool","select","text"
-    },
-    { id: 2,
-      text: "How long where you in prison? (answer in days)",
-      dependencies: [{id:1, requiredAnswer: true}],
-      type: "text" //Domain: "date","check","select","text"
-    },
-    { id: 3,
-      text: "Were you ever ordered to do community work?",
-      dependencies: [{id:1, requiredAnswer: false}],
-      type: "bool" //Domain: "date","check","select","text"
-    },
-    { id: 4,
-      text: "When did you join the company?",
-      dependencies: [],
-      type: "date" //Domain: "date","check","select","text"
-    },
-    { id: 5,
-      text: "Do you live in an empowered zone?",
-      dependencies: [],
-      type: "bool" //Domain: "date","check","select","text"
-    }]
+
+    
+    $scope.section = Section.get( {id:1}, function(){
+        $scope.questionList = $scope.section.questionList
+    });
+
 
     //Refreshes the isReadyToShow status of all questions.
     $scope.analizeQuestions = function() {
@@ -56,14 +29,13 @@ app.controller('mainCtrl',['$scope',function($scope){
          question.isReadyToShow = isReadyToShow;
     };
     
-    $scope.analizeQuestions();
+    //$scope.analizeQuestions();
     $scope.$watch('questionList', function() {
-        $scope.analizeQuestions()
-    },true);
-
-    
-    console.log($scope);
-    
+        if ($scope.questionList) {
+             //console.log(questionList);
+             $scope.analizeQuestions();
+            }
+    },true); 
     
     
 }])
