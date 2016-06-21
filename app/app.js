@@ -1,36 +1,25 @@
 var app = angular.module('dynamic-questionnaire', ['ui.bootstrap','ui.router','ngResource']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-    
     $urlRouterProvider.otherwise('/home');
-    
     $stateProvider
-        
-        // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
             templateUrl: './app/template/home.html',
             controller: 'homeCtrl'
         })
-        
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('about', {
-            // we'll get to this in a bit       
-        });
-        
 });
 
 app.factory('Section', ['$resource', function($resource) {
     return $resource('/api/section/:id');
 }]);
 
-app.controller('homeCtrl',['$scope','$http','$resource','Section',function($scope,$http,$resource,Section){
+app.controller('homeCtrl',['$scope','$http','Section',function($scope,$http,Section){
 
     $scope.section = Section.get( {id:1}, function(){
+        $scope.section = $scope.section
         $scope.questionList = $scope.section.questionList
     });
-
-
 
     //Refreshes the isReadyToShow status of all questions.
     $scope.analizeQuestions = function() {
@@ -50,7 +39,6 @@ app.controller('homeCtrl',['$scope','$http','$resource','Section',function($scop
     
     //$scope.analizeQuestions();
     $scope.$watch('questionList', function() {
-
         if ($scope.questionList) {
              //console.log(questionList);
              $scope.analizeQuestions();

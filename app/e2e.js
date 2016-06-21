@@ -29,7 +29,7 @@ appDev.run(function($httpBackend) {
       type: "bool" //Domain: "date","check","select","text"
     }];
     
-    var section1 = {sectionId:1, questionList: questionList};
+    var section1 = {sectionId:1, title:"Personal information", questionList: questionList};
     
   // returns the current list of phones
   $httpBackend.whenGET('/api/section/1').respond(section1);
