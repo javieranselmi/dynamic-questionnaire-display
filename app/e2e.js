@@ -33,7 +33,6 @@ appDev.run(function($httpBackend) {
     
   // returns the current list of phones
   $httpBackend.whenGET('/api/section/1').respond(section1);
- 
   $httpBackend.whenGET(new RegExp('app\/.*')).passThrough();
   $httpBackend.whenGET(new RegExp('assets\/.*')).passThrough();
   $httpBackend.whenGET(new RegExp('node_modules\/.*')).passThrough();

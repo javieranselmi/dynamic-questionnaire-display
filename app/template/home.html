@@ -1,15 +1,17 @@
 <div class="jumbotron text-center">
     <h2>Please answer the following questions</h2>
 </div>
-<div class="row">
-    <div id="questions">
-        <form>
-        <question ng-repeat="question in questionList | filter:validateQuestion" class="question-display" question="question"></question>
-        <div class="g-recaptcha" data-sitekey="6LeJECITAAAAAHOW8OLMtKS1CqmCaB3c5f0s84rz" data-theme="dark"></div>
-        <button type="submit" class="btn btn-primary">Submit answers</button>
-        </form>
-    </div>
+
+<div class="jumbotron text-center">
+    <form>
+    <question ng-repeat="question in questionList | filter:validateQuestion" class="question" question="question"></question>
+    <button type="submit" class="btn btn-primary">Submit answers</button>
+    </form>
 </div>
+
+<div class="g-recaptcha" data-sitekey="6LeJECITAAAAAHOW8OLMtKS1CqmCaB3c5f0s84rz" data-theme="dark"></div>
+
+
 <hr/>
 <h2>Question object representations - STATIC OJO!</h2>
 <div ng-repeat="question in questionList" class="well">
