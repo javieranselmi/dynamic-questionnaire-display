@@ -1,0 +1,40 @@
+//Section
+
+section.id //Id of the section
+section.questionList //Array of questions
+section.updateQuestions() //Updates questions isReadyToShow property
+
+//Question
+
+question.id //Question id
+question.text //Question text
+question.type //Question type (boolRadio, boolCheckbox, text, number, date, select)
+question.dependencies //Array of dependencies
+question.answer //Answer to the question (true|false|"string"|number|date)
+question.isReadyToShow //Has the question met its dependencies and is ready to show to user?
+question.update(qList) //Analyze if dependencies have been met and update isReadyToShow value.
+question.visible //Must the question be showed now on the view?
+question.showIndex //Index to show  the question.
+question.selectValues //Value array for the select
+question.validation //Validation object that the question must fulfill.
+question.validate() //Analizes the question validation.
+
+//Dependency
+
+dependency.questionId //Id of the question
+dependency.validation //Validation object that the question must fulfill.
+
+//Validation
+
+validation.regex //Regular expresssion the question must match
+validation.mustBeEqualTo //Expected value of the question
+validation.mustBeGreaterThan //Expect that answer is > than this value
+validation.mustBeLessThan //Expect that answer is <= than this value.
+validation.mustBeLessOrEqualto //Expect that answer is <= than this value.
+validation.mustBeGreaterOrEqualTo //Expect that answer is => than this value.
+validation.maxLength //Expect that length of the answer is <= than this value.
+validation.minLength //Expect that length of the answer is >= than this value.
+validation.required //Expect that the question has been answered
+validation.mustBeInSelectValues //Expect that the answer is on the selectValues array.
+validation.mustBeInValues //Expect that the answer is one of the values in this array.
+_____________________________________________________________________________

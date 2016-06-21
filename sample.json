@@ -1,0 +1,39 @@
+{sectionId: 1,
+ questionList: [
+    { id: 1,
+      text: "Have you ever done prison time for a federal fellony?",
+      dependencies: [],
+      type: "bool",
+      showIndex: 1
+    },
+    { id: 2,
+      text: "How long where you in prison? (answer in days)",
+      dependencies: [{id:1, 
+                      validation: {mustBeEqualTo: true}
+                      }
+                    ],
+      type: "text",
+      showIndex: 2
+    },
+    { id: 3,
+      text: "Were you ever ordered to do community work?",
+      dependencies: [{id:1, 
+                      validation: {mustBeEqualTo: false}
+                      }
+                    ],
+      type: "bool",
+      showIndex: 2
+    },
+    { id: 4,
+      text: "When did you join the company?",
+      dependencies: [],
+      type: "date",
+      showIndex: 3
+    },
+    { id: 5,
+      text: "Do you live in an empowered zone?",
+      dependencies: [],
+      type: "bool"
+      showIndex: 3
+    }]
+}

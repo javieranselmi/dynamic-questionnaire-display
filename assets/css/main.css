@@ -13,6 +13,10 @@
     margin-bottom:200px;
 }
 
+.question-display {
+    margin: 0px 2px;
+}
+
 .question-text {
     background: -moz-linear-gradient(left,  rgba(127, 177, 165, 0.52) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(left,  rgba(127, 177, 165, 0.52) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -20,6 +24,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
     padding: 10px;
     border-radius: 5px 5px 5px 5px;
+    font-size: 20px;
 }
 .questions-title {
     background: rgb(242,246,248); /* Old browsers */
