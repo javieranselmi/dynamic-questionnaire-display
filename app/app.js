@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var app = angular.module('app', ['ui.bootstrap','ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -61,6 +62,22 @@ app.controller('homeCtrl',['$scope',function($scope){
       dependencies: [],
       type: "bool" //Domain: "date","check","select","text"
     }]
+=======
+var app = angular.module('dynamic-questionnaire', ['ui.bootstrap','ngResource']);
+
+app.factory('Section', ['$resource', function($resource) {
+    return $resource('/api/section/:id');
+}]);
+
+app.controller('mainCtrl',['$scope','$http','$resource','Section',function($scope,$http,$resource,Section){
+    
+
+    
+    $scope.section = Section.get( {id:1}, function(){
+        $scope.questionList = $scope.section.questionList
+    });
+
+>>>>>>> origin/master
 
     //Refreshes the isReadyToShow status of all questions.
     $scope.analizeQuestions = function() {
@@ -78,13 +95,22 @@ app.controller('homeCtrl',['$scope',function($scope){
          question.isReadyToShow = isReadyToShow;
     };
     
-    $scope.analizeQuestions();
+    //$scope.analizeQuestions();
     $scope.$watch('questionList', function() {
+<<<<<<< HEAD
         $scope.analizeQuestions()
     },true);
 
     
     console.log($scope);
+=======
+        if ($scope.questionList) {
+             //console.log(questionList);
+             $scope.analizeQuestions();
+            }
+    },true); 
+    
+>>>>>>> origin/master
     
 }])
 
