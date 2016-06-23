@@ -14,95 +14,25 @@ app.factory('Section', ['$resource', function($resource) {
     return $resource('/api/section/:id');
 }]);
 
-app.controller('homeCtrl',['$scope','$http','Section',function($scope,$http,Section){
+app.controller('homeCtrl',['$scope','$http','section','question','dependency','validation',function($scope,$http,section,question,dependency,validation){
 
-    $scope.section = Section.get( {id:1}, function(){
-        $scope.section = $scope.section
-        $scope.questionList = $scope.section.questionList
-    });
+    var v1 = new validation({mustBeEqualTo: true });
+    var v2 = new validation({mustBeEqualTo: false});
 
-    //Refreshes the isReadyToShow status of all questions.
-    $scope.analizeQuestions = function() {
-        $scope.questionList.forEach(analizeQuestion);
-    };
+    var d1 = new dependency(1, v1);
+    var d2 = new dependency(1, v2);
+
+    var q1 = new question(1, "Have you ever done prison time for a federal fellony?", "bool", [], 0);
+    var q2 = new question(2, "How long where you in prison? (answer in days)"       , "text", [d1], 1);
+    var q3 = new question(3, "Were you ever ordered to do community work?"          , "bool", [d2], 1);
+    var q4 = new question(4, "When did you join the company?"                       , "date", [], 2);
+    var q5 = new question(5, "Do you live in an empowered zone?"                    , "bool", [], 3);
+
+    var questionList = [q1,q2,q3,q4,q5];
+    var section = new section(1, "Personal Info", questionList);
     
-    //Analizes a question dependencies and refreshes its isReadyToShow status.
-    var analizeQuestion = function(question) {
-         var isReadyToShow = question.dependencies.reduce(function(booleanValue, currentDependency) {
-                var dependencyFullfilled = $scope.questionList.filter(function(question) {
-                    return question.id === currentDependency.id && question.answer === currentDependency.requiredAnswer;
-                }).length;
-                return booleanValue && Boolean(dependencyFullfilled);
-            }, true);
-         question.isReadyToShow = isReadyToShow;
-    };
+    $scope.section = section;
+    console.log($scope.section);
     
-    //$scope.analizeQuestions();
-    $scope.$watch('questionList', function() {
-        if ($scope.questionList) {
-             //console.log(questionList);
-             $scope.analizeQuestions();
-            }
-    },true); 
-    
+
 }])
-
-
-
-//QUESTION DIRECTIVE
-.directive('question', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      question: '='
-    },
-    templateUrl: 'app/template/question.html',
-    link: function(scope,elem,attr) {
-        //scope.canShow = true;
-    }
-  };
-})
-
-
-
-// QUESTION TYPE DIRECTIVES - NOT FOR DIRECT USE
-.directive('questionBool', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      question: '='
-    },
-    templateUrl: 'app/template/questionBool.html'
-  };
-})
-
-.directive('questionDate', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      question: '='
-    },
-    templateUrl: 'app/template/questionDate.html'
-  };
-})
-
-.directive('questionText', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      question: '=',
-    },
-    templateUrl: 'app/template/questionText.html'
-  };
-})
-
-
-.directive('questionSelect', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      question: '='
-    },
-    templateUrl: 'app/template/questionSelect.html'
-  };
-})
