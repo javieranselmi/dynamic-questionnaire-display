@@ -4,7 +4,8 @@ app
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      section: '='
     },
     templateUrl: 'app/template/question.html',
     link: function(scope,elem,attr) {
@@ -20,7 +21,8 @@ app
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      section: '='
     },
     templateUrl: 'app/template/questionBool.html'
   };
@@ -30,7 +32,8 @@ app
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      section: '='
     },
     templateUrl: 'app/template/questionDate.html'
   };
@@ -41,6 +44,7 @@ app
     restrict: 'E',
     scope: {
       question: '=',
+      section: '='
     },
     templateUrl: 'app/template/questionText.html'
   };
@@ -51,7 +55,8 @@ app
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      section: '='
     },
     templateUrl: 'app/template/questionSelect.html'
   };

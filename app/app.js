@@ -33,6 +33,12 @@ app.controller('homeCtrl',['$scope','$http','section','question','dependency','v
     
     $scope.section = section;
     console.log($scope.section);
+    console.log($scope.section);
+    //$scope.section.submitAnswerAndUpdate(1,true);
+    /*
+    $scope.$apply(function(){
+        $scope.section.submitAnswer(1,true);
+    })*/
     
 
 }])

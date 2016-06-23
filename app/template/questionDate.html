@@ -1,2 +1,2 @@
 <p class="question-text">{{ question.text }}</p>
-<input type="date" class="form-control" ng-model="question.answer"/>
+<input type="date" class="form-control" ng-model="question.answer" ng-change="section.submitAnswerAndUpdate(question.id, question.answer)" />

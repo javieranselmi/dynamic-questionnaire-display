@@ -4,7 +4,7 @@
 </div>
 <div class="jumbotron text-center">
     <form>
-    <question ng-repeat="question in section.questionList" class="question" question="question"></question>
+    <question ng-repeat="question in section.questionList | filter:{visibility:true} " class="question" question="question" section="section"></question>
     <button type="submit" class="btn btn-primary">Submit answers</button>
     </form>
 </div>
