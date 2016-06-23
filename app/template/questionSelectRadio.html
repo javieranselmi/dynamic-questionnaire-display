@@ -1,0 +1,7 @@
+<p class="question-text">{{ question.text }}</p>
+<div class="radio">
+ <label ng-repeat = "opt in question.selectValues" class="radio-label">
+    <input type="radio" ng-model="question.answer" ng-value="opt" ng-click="section.submitAnswerAndUpdate(question.id, opt)">
+    {{ opt }}
+  </label>
+</div>

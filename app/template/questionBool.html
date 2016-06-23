@@ -1,11 +1,11 @@
 <p class="question-text">{{ question.text }}</p>
 <div class="radio">
- <label>
+ <label class="radio-label">
     <input type="radio" ng-model="question.answer" ng-value="true" ng-click="section.submitAnswerAndUpdate(question.id, true)">
     Yes
-  </label><br/>
-  <label>
+  </label>
+  <label class="radio-label">
     <input type="radio" ng-model="question.answer" ng-value="false" ng-click="section.submitAnswerAndUpdate(question.id, false)">
     No
-  </label><br/>
+  </label>
 </div>

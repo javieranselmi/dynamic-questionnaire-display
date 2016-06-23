@@ -1,2 +1,2 @@
 <p class="question-text">{{ question.text }}</p>
-<select class="form-control" ng-model="question.answer" ng-options="o as o for o in question.options" ng-change="section.submitAnswerAndUpdate(question.id, question.answer)></select>
+<select class="form-control" ng-model="question.answer" ng-options="o as o for o in question.selectValues" ng-change="section.submitAnswerAndUpdate(question.id, question.answer)"></select>

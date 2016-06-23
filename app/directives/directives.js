@@ -61,3 +61,23 @@ app
     templateUrl: 'app/template/questionSelect.html'
   };
 })
+.directive('questionNotification', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      question: '=',
+      section: '='
+    },
+    templateUrl: 'app/template/questionNotification.html'
+  };
+})
+.directive('questionSelectRadio', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      question: '=',
+      section: '='
+    },
+    templateUrl: 'app/template/questionSelectRadio.html'
+  };
+})

@@ -1,11 +1,11 @@
-<div class="jumbotron text-center">
+<div class="well text-center">
     <h2>{{ section.title }}</h2>
-    <p>Please respond to these questions</p>
+    <p> {{section.subtitle }}</p>
 </div>
 <div class="jumbotron text-center">
     <form>
     <question ng-repeat="question in section.questionList | filter:{visibility:true} " class="question" question="question" section="section"></question>
+    <div class="g-recaptcha question" data-sitekey="6LeJECITAAAAAHOW8OLMtKS1CqmCaB3c5f0s84rz" data-theme="dark"></div>
     <button type="submit" class="btn btn-primary">Submit answers</button>
     </form>
 </div>
-<div class="g-recaptcha" data-sitekey="6LeJECITAAAAAHOW8OLMtKS1CqmCaB3c5f0s84rz" data-theme="dark"></div>

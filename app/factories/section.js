@@ -1,8 +1,9 @@
 app.factory('section', [function() {
-    var s = function Section(id, title, questionList) {
+    var s = function Section(id, title, subtitle, questionList) {
         var self = this;
         this.id = id;
         this.title = title;
+        this.subtitle = subtitle;
         this.questionList = questionList;
 
         this.updateQuestionsDependencies = function(modifiedQuestion){
