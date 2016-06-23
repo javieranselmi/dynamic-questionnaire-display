@@ -94,7 +94,7 @@ function Question(id, text, type, dependencies, showIndex, validation, selectVal
     this.validation = validation;
     
     //Properties with defaults
-    this.isDependencyReady = false;
+    this.isDependencyReady = this.dependencies.length === 0 ? true : false;
     this.isAnswerValid = false;
     this.visibility = showIndex === 0? true : false;
     
@@ -201,16 +201,133 @@ function Validation(obj) {
     this.mustBeInSelectValues = obj.mustBeInSelectValues;
     this.mustBeInValues = obj.mustBeInValues;
     
-    //Methods
-    this.validate = function(question) {
-        //One if for each validation.
+    this.validateMustBeEqualTo = function(question) {
         if (angular.isDefined(this.mustBeEqualTo)) {
-                if (question.answer !== this.mustBeEqualTo) {
+                if (question.answer === this.mustBeEqualTo) {
+                    return true;
+                } else {
                     return false;
                 }
-            }
-        //If no validation returned false, then this returns true.
-        return true;
+        } else {
+            return true;
+        }
+    };
+    this.validateMustBeGreaterThan = function(question) {
+        if (angular.isDefined(this.mustBeGreaterThan)) {
+                if (question.answer > this.mustBeGreaterThan) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMustBeLessThan = function(question) {
+        if (angular.isDefined(this.mustBeLessThan)) {
+                if (question.answer < this.MustBeLessThan) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMustBeLessOrEqualTo = function(question) {
+        if (angular.isDefined(this.mustBeLessOrEqualTo)) {
+                if (question.answer <= this.mustBeLessOrEqualTo) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMustBeGreaterOrEqualTo = function(question) {
+        if (angular.isDefined(this.mustBeGreaterOrEqualTo)) {
+                if (question.answer >= this.mustBeGreaterOrEqualTo) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMaxLength = function(question) {
+        if (angular.isDefined(this.maxLength)) {
+                if (question.answer.length <= this.maxLength) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMinLength = function(question) {
+        if (angular.isDefined(this.minLength)) {
+                if (question.answer.length >= this.minLength) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateRequired = function(question) {
+        if (angular.isDefined(this.required) || this.required === false) {
+                if (angular.isDefined(question.answer) && question.answer !== "") {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validateMustBeInSelectValues = function(question) {
+        if (angular.isDefined(this.mustBeInSelectValues) || this.mustBeInSelectValues === false) {
+                if (angular.isDefined(question.selectValues)) {
+                    if ($.inArray(question.answer, question.selectValues) > -1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+        } else {
+            return true; //Retorna true si no está definido la propiedad
+        }
+    };
+    this.validateMustBeInValues = function(question) {
+        if (angular.isDefined(this.mustBeInValues)) {
+                if ($.inArray(question.answer, question.mustBeInValues) > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } else {
+            return true;
+        }
+    };
+    this.validate = function(question) {
+        return (
+            this.validateMustBeEqualTo(question) &&
+            this.validateMustBeGreaterThan(question) &&
+            this.validateMustBeLessThan(question) &&
+            this.validateMustBeLessOrEqualTo(question) &&
+            this.validateMustBeGreaterOrEqualTo(question) &&
+            this.validateMaxLength(question) &&
+            this.validateMinLength(question) &&
+            this.validateRequired(question) &&
+            this.validateMustBeInSelectValues(question) &&
+            this.validateMustBeInValues(question)
+            )
     };
 }
 
